@@ -5,6 +5,8 @@
 package view;
 
 import model.WordCounterLogic; 
+import javax.swing.JOptionPane;
+
 
 
 public class WordCounterFrame extends javax.swing.JFrame {
@@ -15,6 +17,7 @@ public class WordCounterFrame extends javax.swing.JFrame {
     public WordCounterFrame() {
         initComponents();
         logic = new WordCounterLogic();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -35,8 +38,10 @@ public class WordCounterFrame extends javax.swing.JFrame {
         lblKarakter = new javax.swing.JLabel();
         lblKalimat = new javax.swing.JLabel();
         lblParagraf = new javax.swing.JLabel();
+        btnHapus = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Aplikasi Penghitung Kata");
 
         javax.swing.GroupLayout panelUtamaLayout = new javax.swing.GroupLayout(panelUtama);
         panelUtama.setLayout(panelUtamaLayout);
@@ -46,7 +51,7 @@ public class WordCounterFrame extends javax.swing.JFrame {
         );
         panelUtamaLayout.setVerticalGroup(
             panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 375, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -75,31 +80,37 @@ public class WordCounterFrame extends javax.swing.JFrame {
         lblParagraf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblParagraf.setText("Jumlah Paragraf:");
 
+        btnHapus.setText("Hapus");
+        btnHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(scrollTeks, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(115, 115, 115)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblKata, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblKarakter, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblKalimat, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblParagraf, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(82, 82, 82))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblParagraf, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(161, 161, 161)
-                                .addComponent(btnHitung, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(101, 101, 101)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(scrollTeks, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addComponent(btnHitung, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelUtama, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -113,7 +124,9 @@ public class WordCounterFrame extends javax.swing.JFrame {
                         .addGap(11, 11, 11)
                         .addComponent(scrollTeks, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnHitung)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnHitung)
+                            .addComponent(btnHapus))
                         .addGap(18, 18, 18)
                         .addComponent(lblKata)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -122,7 +135,7 @@ public class WordCounterFrame extends javax.swing.JFrame {
                         .addComponent(lblKalimat)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblParagraf)
-                        .addGap(0, 13, Short.MAX_VALUE)))
+                        .addGap(0, 29, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -130,7 +143,7 @@ public class WordCounterFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHitungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHitungActionPerformed
-         String teks = txtInput.getText();
+        String teks = txtInput.getText();
          
         int jumlahKata = logic.countWords(teks);
         int jumlahKarakter = logic.countCharacters(teks);
@@ -143,6 +156,31 @@ public class WordCounterFrame extends javax.swing.JFrame {
         lblParagraf.setText("Jumlah Paragraf: " + jumlahParagraf);
          
     }//GEN-LAST:event_btnHitungActionPerformed
+
+    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
+    int konfirmasi = JOptionPane.showConfirmDialog(
+            this, 
+            "Apakah Anda yakin ingin menghapus teks?", 
+            "Konfirmasi Hapus", 
+            JOptionPane.YES_NO_OPTION, 
+            JOptionPane.WARNING_MESSAGE
+    );
+
+    // Jika pengguna menekan "Yes"
+    if (konfirmasi == JOptionPane.YES_OPTION) {
+        // Bersihkan isi teks area
+        txtInput.setText("");
+
+        // Reset semua label hasil ke nilai awal
+        lblKata.setText("Jumlah Kata:");
+        lblKarakter.setText("Jumlah Karakter:");
+        lblKalimat.setText("Jumlah Kalimat:");
+        lblParagraf.setText("Jumlah Paragraf:");
+    }
+    
+
+         
+    }//GEN-LAST:event_btnHapusActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,6 +218,7 @@ public class WordCounterFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnHitung;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblKalimat;
